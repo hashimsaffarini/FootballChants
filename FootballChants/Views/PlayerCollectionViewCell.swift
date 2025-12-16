@@ -119,8 +119,6 @@ class PlayerCollectionViewCell: UICollectionViewCell {
         let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)
         let img = UIImage(systemName: "heart", withConfiguration: config)
         btn.setImage(img, for: .normal)
-        let filledImg = UIImage(systemName: "heart.fill", withConfiguration: config)
-        btn.setImage(filledImg, for: .selected)
         btn.tintColor = .systemRed
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.layer.cornerRadius = 18
