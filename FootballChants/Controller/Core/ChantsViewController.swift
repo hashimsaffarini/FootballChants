@@ -27,9 +27,7 @@ class ChantsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.topItem?.title = "Football Chants"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
+        title = "Teams"
         setupTableView()
     }
 }

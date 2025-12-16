@@ -8,22 +8,25 @@
 import UIKit
 
 class PlayersViewController: UIViewController {
+    
+    private let playersListView = PlayersListView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
+        title = "Players"
+        setupViews()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupViews(){
+        view.addSubview(playersListView)
+        NSLayoutConstraint.activate([
+            playersListView.topAnchor.constraint(equalTo: view.topAnchor),
+            playersListView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            playersListView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            playersListView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
-    */
+
 
 }
