@@ -68,11 +68,7 @@ extension ChantsViewController : UITableViewDataSource {
 extension ChantsViewController : TeamTableViewCellDelegate {
     func didTapPlaybackButton(for team: Team) {
         guard let index = teamsViewModel.teams.firstIndex(where: { $0.id == team.id }) else { return }
-        
-        teamsViewModel.teams[index].isPlaying.toggle()
-        
-        let indexPath = IndexPath(row: index, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .none)
+        let link = teamsViewModel.teams[index].youtubeLink
+        UIApplication.shared.open(URL(string: link)!)
     }
-    
 }

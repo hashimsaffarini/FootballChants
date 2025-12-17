@@ -13,6 +13,9 @@ struct Team {
     let manager : Manager
     let info : String
     let founded : String
+    var youtubeLink : String {
+        return "https://www.youtube.com/results?search_query=\(name)"
+    }
     var isPlaying : Bool = false
     
 }

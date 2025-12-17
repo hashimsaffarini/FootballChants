@@ -10,14 +10,17 @@ import Kingfisher
 
 final class PlayersViewModel : NSObject {
     let dummyPlayers: [Player] = [
+        
         Player(
-            id: "1",
-            name: "Kevin De Bruyne",
-            age: 34,
-            number: 17,
-            position: "Midfielder",
-            photo: "https://i.guim.co.uk/img/media/4428df8f389237e6320571ba442f23d41951ccb5/0_400_6000_3600/master/6000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6da3df5fd4898113d2abc367aaeffa11"
+            id: "3",
+            name: "Mohamed Salah",
+            age: 33,
+            number: 11,
+            position: "Forward",
+            photo: "https://d3j2s6hdd6a7rg.cloudfront.net/v2/uploads/media/default/0002/02/thumb_101167_default_news_size_5.jpeg"
         ),
+        
+      
         
         Player(
             id: "2",
@@ -28,14 +31,7 @@ final class PlayersViewModel : NSObject {
             photo: "https://static.srpcdigital.com/styles/1037xauto/public/2025-09/1203851.jpeg.webp"
         ),
         
-        Player(
-            id: "3",
-            name: "Mohamed Salah",
-            age: 33,
-            number: 11,
-            position: "Forward",
-            photo: "https://d3j2s6hdd6a7rg.cloudfront.net/v2/uploads/media/default/0002/02/thumb_101167_default_news_size_5.jpeg"
-        ),
+      
         
         Player(
             id: "4",
@@ -54,7 +50,14 @@ final class PlayersViewModel : NSObject {
             position: "Forward",
             photo: "https://www.arsenal.com/sites/default/files/styles/large_16x9/public/images/saka-celeb-olympiacos_hcz1i375.png?h=5f9e3ed6&auto=webp&itok=lR9b2I4n"
         ),
-        
+        Player(
+            id: "1",
+            name: "Kevin De Bruyne",
+            age: 34,
+            number: 17,
+            position: "Midfielder",
+            photo: "https://i.guim.co.uk/img/media/4428df8f389237e6320571ba442f23d41951ccb5/0_400_6000_3600/master/6000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6da3df5fd4898113d2abc367aaeffa11"
+        ),
         Player(
             id: "6",
             name: "Martin Ødegaard",

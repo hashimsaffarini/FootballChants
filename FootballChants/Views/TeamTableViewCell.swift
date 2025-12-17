@@ -113,10 +113,6 @@ class TeamTableViewCell: UITableViewCell {
     
     @objc private func didTapPlayback() {
         guard let team = team else { return }
-        
-        let newImage = team.isPlaying ? Assets.play : Assets.pause
-        playbackButton.setImage(newImage, for: .normal)
-        
         delegate?.didTapPlaybackButton(for: team)
     }
     
