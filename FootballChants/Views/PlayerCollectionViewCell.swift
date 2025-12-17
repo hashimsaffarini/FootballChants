@@ -8,9 +8,15 @@
 import UIKit
 import Kingfisher
 
+protocol PlayerCollectionViewCellDelegate : AnyObject {
+    func toggleFavorite(for playerID: String)
+}
+
 class PlayerCollectionViewCell: UICollectionViewCell {
     
     static let id = "PlayerCollectionViewCell"
+    public weak var delegate: PlayerCollectionViewCellDelegate?
+    private var playerID : String?
     
     private var containerView: UIView = {
         let container = UIView()
@@ -117,8 +123,10 @@ class PlayerCollectionViewCell: UICollectionViewCell {
     private var favBtn : UIButton = {
         let btn = UIButton()
         let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)
-        let img = UIImage(systemName: "heart", withConfiguration: config)
-        btn.setImage(img, for: .normal)
+
+        btn.setImage(UIImage(systemName: "heart", withConfiguration: config), for: .normal)
+        btn.setImage(UIImage(systemName: "heart.fill", withConfiguration: config), for: .selected)
+
         btn.tintColor = .systemRed
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.layer.cornerRadius = 18
@@ -130,6 +138,7 @@ class PlayerCollectionViewCell: UICollectionViewCell {
         btn.layer.shadowRadius = 4
         return btn
     }()
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -159,7 +168,31 @@ class PlayerCollectionViewCell: UICollectionViewCell {
         
         infoStackView.addArrangedSubview(numberLabel)
         infoStackView.addArrangedSubview(ageLabel)
+        
+        favBtn.addTarget(self, action: #selector(didTapFav), for: .touchUpInside)
     }
+    
+    @objc private func didTapFav(){
+        guard let playerID = self.playerID else { return }
+        favBtn.isSelected.toggle()
+        animateFavorite()
+        delegate?.toggleFavorite(for: playerID)
+    }
+    
+    private func animateFavorite() {
+        UIView.animate(
+            withDuration: 0.15,
+            animations: {
+                self.favBtn.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            },
+            completion: { _ in
+                UIView.animate(withDuration: 0.15) {
+                    self.favBtn.transform = .identity
+                }
+            }
+        )
+    }
+
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -188,10 +221,13 @@ class PlayerCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with player : Player){
+        self.playerID = player.id
         imageView.kf.setImage(with: URL(string : player.photo))
         nameLabel.text = player.name
         positionLabel.text = player.position.uppercased()
         numberLabel.text = "#\(player.number)"
         ageLabel.text = "\(player.age) yrs"
+        let isFav = FavoritesManager.shared.isFavorite(playerID: player.id)
+        favBtn.isSelected = isFav
     }
 }

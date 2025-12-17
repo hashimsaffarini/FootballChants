@@ -8,7 +8,8 @@
 import UIKit
 import Kingfisher
 
-final class PlayersViewModel : NSObject {
+final class PlayersViewModel : NSObject, PlayerCollectionViewCellDelegate {
+
     let dummyPlayers: [Player] = [
         
         Player(
@@ -19,8 +20,6 @@ final class PlayersViewModel : NSObject {
             position: "Forward",
             photo: "https://d3j2s6hdd6a7rg.cloudfront.net/v2/uploads/media/default/0002/02/thumb_101167_default_news_size_5.jpeg"
         ),
-        
-      
         
         Player(
             id: "2",
@@ -95,6 +94,7 @@ extension PlayersViewModel : UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerCollectionViewCell.id, for: indexPath) as! PlayerCollectionViewCell
         cell.configure(with: dummyPlayers[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -102,5 +102,9 @@ extension PlayersViewModel : UICollectionViewDataSource, UICollectionViewDelegat
         let totalSpacing: CGFloat = 10 + 10 + 10
         let width = (collectionView.bounds.width - totalSpacing) / 2
         return CGSize(width: width, height: width * 1.5)
+    }
+    
+    func toggleFavorite(for playerID: String) {
+        FavoritesManager.shared.toggle(playerID: playerID)
     }
 }

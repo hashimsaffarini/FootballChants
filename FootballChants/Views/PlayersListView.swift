@@ -11,7 +11,7 @@ class PlayersListView: UIView {
     
     let playersViewModel = PlayersViewModel()
     
-    private let collectionView = {
+     let collectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)

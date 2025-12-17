@@ -10,14 +10,26 @@ import UIKit
 class PlayersViewController: UIViewController {
     
     private let playersListView = PlayersListView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Players"
         setupViews()
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshUI), name: .favoritesDidUpdate, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    
+    @objc private func refreshUI() {
+        DispatchQueue.main.async {
+            self.playersListView.collectionView.reloadData()
+        }
+    }
     private func setupViews(){
         view.addSubview(playersListView)
         NSLayoutConstraint.activate([
@@ -27,6 +39,6 @@ class PlayersViewController: UIViewController {
             playersListView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-
-
+    
+    
 }
